@@ -167,7 +167,7 @@ const SignIn = () => {
     const handleSubmit = async e => {
         e.preventDefault();
         try{
-            const url = "http://localhost:8800/api/auth/login"
+            const url = "http://45.84.225.49:8800/api/auth/login"
             const {data:res} = await axios.post(url, data);
             localStorage.setItem("token", res.data)
             window.location = "/account"
