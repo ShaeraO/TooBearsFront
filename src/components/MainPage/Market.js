@@ -107,7 +107,7 @@ const Market = () => {
   return (
     <Section>
       <SwitchContent />
-      <MarketPart>
+      {/* <MarketPart>
         <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
         <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
         <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
@@ -121,7 +121,7 @@ const Market = () => {
         <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
         <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
       </MarketPart>
-      <Pagination />
+      <Pagination /> */}
     </Section>
   )
 }

@@ -158,13 +158,12 @@ const SignIn = () => {
     });
 
     const [err, setError] = useState("")
-    const navigate = useNavigate()
 
     const handleChange = ({currentTarget: input}) => {
         setData({...data, [input.name]: input.value})
     }
 
-    const handleSubmit = async e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try{
             const url = "http://45.84.225.49:8800/api/auth/login"

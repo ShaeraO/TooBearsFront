@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { Routes, Route } from 'react-router-dom'
-import RegisterBlock from './Register'
+
 
 const Block = styled.div`
 background-color: rgba(213, 200, 200, 0.7);
@@ -40,8 +38,8 @@ const RegisterNav = () => {
   return (
     <Block>
         <Menu>
-            <Link to="register"><MenuItem>Регистрация</MenuItem></Link>
-            <Link to="login"><MenuItem>Вход</MenuItem></Link>
+            <MenuItem>Регистрация</MenuItem>
+            <MenuItem>Вход</MenuItem>
         </Menu>
     </Block>
   )

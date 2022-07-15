@@ -152,7 +152,6 @@ const RegisterBlock = () => {
     })
 
     const [err, setErr] = useState()
-    const navigate = useNavigate()
 
     const handleChange = (e) => {
         setData(prev => ({...prev, [e.target.id] : e.target.value}))
@@ -163,7 +162,6 @@ const RegisterBlock = () => {
         try{
             const url = "http://45.84.225.49:8800/api/auth/register"
             const { data:res } = await axios.post(url, data)
-            navigate("/account")
             console.log(res.message)
         }catch(err){
             if (err.response && 
