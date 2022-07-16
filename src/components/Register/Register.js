@@ -161,7 +161,7 @@ const RegisterBlock = () => {
     const handleClick = async (e) =>{
         e.preventDefault()
         try{
-            const url = "http://localhost:8800/api/auth/register"
+            const url = "http://45.84.225.49:8800/api/auth/register"
             const { data:res } = await axios.post(url, data)
             console.log(res.message)
         }catch(err){
