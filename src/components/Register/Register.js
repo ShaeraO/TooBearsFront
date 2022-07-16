@@ -148,19 +148,20 @@ const RegisterBlock = () => {
         username:"",
         surname:"",
         email:"",
+        role:"User",
         password:"",
     })
 
     const [err, setErr] = useState()
 
     const handleChange = (e) => {
-        setData(prev => ({...prev, [e.target.id] : e.target.value}))
+        setData(prev => ({...prev, [e.target.id] : ((e.target.value) || (e.target.checked)) }))
     }
 
     const handleClick = async (e) =>{
         e.preventDefault()
         try{
-            const url = "http://45.84.225.49:8800/api/auth/register"
+            const url = "http://localhost:8800/api/auth/register"
             const { data:res } = await axios.post(url, data)
             console.log(res.message)
         }catch(err){
@@ -180,12 +181,12 @@ const RegisterBlock = () => {
     <Head>Я...</Head>
     <CheckBoxes>
         <Check>
-            <input type="checkbox" id='check' name='check'/>
-            <label htmlFor='check'>Автор</label>
+            <input type="checkbox" id='role' value="Seller" onChange={handleChange} name='check'/>
+            <label htmlFor='role'>Автор</label>
         </Check>
         <Check>
-            <input type="checkbox" id='check2' name='check2'/>
-            <label htmlFor='check2'>Коллекционер</label>
+            <input type="checkbox" id='check' name='check2'/>
+            <label htmlFor='check'>Коллекционер</label>
         </Check>
     </CheckBoxes>
     <FormBlock>
