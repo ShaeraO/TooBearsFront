@@ -155,7 +155,7 @@ const RegisterBlock = () => {
     const [err, setErr] = useState()
 
     const handleChange = (e) => {
-        setData(prev => ({...prev, [e.target.id] : ((e.target.value) || (e.target.checked)) }))
+        setData(prev => ({...prev, [e.target.id] : e.target.value}))
     }
 
     const handleClick = async (e) =>{
