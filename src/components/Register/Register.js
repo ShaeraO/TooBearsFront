@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 
 const Head = styled.h5`
 font-weight: 400;
@@ -144,66 +142,35 @@ span{
 
 const RegisterBlock = () => {
 
-    const [data, setData] = useState({
-        username:"",
-        surname:"",
-        email:"",
-        role:"User",
-        password:"",
-    })
-
-    const [err, setErr] = useState()
-
-    const handleChange = (e) => {
-        setData(prev => ({...prev, [e.target.id] : e.target.value}))
-    }
-
-    const handleClick = async (e) =>{
-        e.preventDefault()
-        try{
-            const url = "http://45.84.225.49:8800/api/auth/register"
-            const { data:res } = await axios.post(url, data)
-            console.log(res.message)
-        }catch(err){
-            if (err.response && 
-                err.response.status >= 400 &&
-                err.response.status <= 500
-            ){
-                setErr(err.response.data.message)
-            }
-        }
-    }
-        //45.84.225.49
-
   return (
 
     <>
     <Head>Я...</Head>
     <CheckBoxes>
         <Check>
-            <input type="checkbox" id='role' value="Seller" onChange={handleChange} name='check'/>
-            <label htmlFor='role'>Автор</label>
+            <input type="checkbox" name='check' id='check'/>
+            <label htmlFor='check'>Автор</label>
         </Check>
         <Check>
-            <input type="checkbox" id='check' name='check2'/>
-            <label htmlFor='check'>Коллекционер</label>
+            <input type="checkbox" id='check2' name='check2'/>
+            <label htmlFor='check2'>Коллекционер</label>
         </Check>
     </CheckBoxes>
     <FormBlock>
-        <Name>Ссылка на приглашение</Name>
+        <Name>Код приглашения</Name>
         <input type="text" size="0" />
     </FormBlock>
     <FormBlock>
         <Name>Имя на английском</Name>
-        <input type="text" size="0" id="username"  value={data.username} required onChange={handleChange} />
+        <input type="text" size="0" id="username" />
     </FormBlock>
     <FormBlock>
         <Name>Фамилия на английском</Name>
-        <input type="text" size="0" id="surname"  value={data.surname} required onChange={handleChange} />
+        <input type="text" size="0" id="surname" />
     </FormBlock>
     <FormBlock>
         <Name>Email</Name>
-        <input type="text" size="0" id="email" value={data.email} required onChange={handleChange} />
+        <input type="text" size="0" id="email"  />
     </FormBlock>
     <PassBlock>
         <Name>
@@ -211,8 +178,7 @@ const RegisterBlock = () => {
         </Name>
         <input type="password" size="0" placeholder="не менее 8 символов" id="password" /* value={data.password} required onChange={handleChange} */ /><img src='https://svgshare.com/i/iKc.svg' title='lock' />
     </PassBlock>
-    {err && <span>Пользователь с таким Email уже есть</span>}
-    <BtnSubmit onClick={handleClick}  >
+    <BtnSubmit  >
             <span>Регистрация</span>
     </BtnSubmit>
     <Block>

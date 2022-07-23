@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Forgot from './Forgot'
 import { AuthContext } from '../../context/AuthContext'
@@ -125,63 +125,6 @@ input:disabled+label::before{
 
 
 const SignIn = () => {
-
-    // const [credentials, setCredentials] = useState({
-    //     username:undefined,
-    //     password:undefined,
-    // })
-
-    // const {loading, error, dispatch } = useContext(AuthContext);
-
-    // const navigate = useNavigate()
-
-    //  const handleChange = (e) => {
-    //      setCredentials(prev => ({...prev, [e.target.id] : e.target.value}))
-    //  }
-
-    // const handleClick = async e => {
-    //     e.preventDefault();
-    //     dispatch({type: "LOGIN_START"})
-    //     try{
-    //         const res = await axios.post("/auth/login", credentials)
-    //         dispatch({type:"LOGIN_SUCCESS", payload: res.data})
-    //         navigate("/")
-    //     } catch(err){
-    //         dispatch({type:"LOGIN_FAILURE", payload:err.response.data})
-    //     }
-    // }
-
- 
-    const [data, setData] = useState({
-        email:"",
-        password:"",
-    });
-
-    const [err, setError] = useState("")
-
-    const handleChange = ({currentTarget: input}) => {
-        setData({...data, [input.name]: input.value})
-    }
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try{
-            const url = "http://45.84.225.49:8800/api/auth/login"
-            const {data:res} = await axios.post(url, data);
-            localStorage.setItem("token", res.data)
-            window.location = "/account"
-        } catch (err){
-            if (
-                err.response &&
-                err.response.status >= 400 &&
-                err.response.status <= 500
-            ){
-                setError(err.response.data.message)
-            }
-        }
-    }
-
-
   return (
     <>
     <Block>
@@ -190,10 +133,7 @@ const SignIn = () => {
             <input 
             type="text" 
             size="0" 
-            name="email"
-            onChange={handleChange}
-            value={data.email}
-            required
+            id="email"
             />
         </FormBlock>
         <PassBlock>
@@ -203,17 +143,13 @@ const SignIn = () => {
         <input 
         type="password" 
         size="0" 
-        name="password"
-        onChange={handleChange}
-        value={data.password}
-        required
+        id="password"
         placeholder="не менее 8 символов" 
         /><img src='https://svgshare.com/i/iKc.svg' title='lock' />
     </PassBlock>
     <CheckBoxes>
-    {err && <span>Неправильный логин или пароль</span>}
 
-    <BtnSubmit onClick={handleSubmit} >
+    <BtnSubmit>
             <span>Вход</span>
     </BtnSubmit>
     <Check>
