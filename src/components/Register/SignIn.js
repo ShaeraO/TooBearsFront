@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import Forgot from './Forgot'
-import { AuthContext } from '../../context/AuthContext'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-
+import { useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchAuth, selectIsAuth } from '../../redux/slices/auth'
+import { Navigate } from 'react-router-dom'
 const Block = styled.div`
 
 `
@@ -125,15 +125,48 @@ input:disabled+label::before{
 
 
 const SignIn = () => {
+  const isAuth = useSelector(selectIsAuth)
+  const dispatch = useDispatch()
+  const {register, handleSubmit, setError, formState : {errors, isValid}} = useForm({
+    defaultValues:{
+        email: '',
+        password: ''
+    },
+    mode: 'onChange'
+  });
+
+  const onSubmit = async (values) => {
+    const data = await dispatch(fetchAuth(values))
+
+    if (!data.payload) {
+        return alert('Не удалось авторизоваться')
+    }
+
+    if ('token' in data.payload){
+        window.localStorage.setItem('token', data.payload.token)
+    }
+  }
+
+  console.log('isAuth', isAuth)
+
+
+  if (isAuth){
+    return <Navigate to ="/account" />
+  }
+
+
+
   return (
     <>
     <Block>
+        <form onSubmit={handleSubmit(onSubmit)}>
         <FormBlock>
             <Name>Логин</Name>
             <input 
-            type="text" 
+            type="email" 
             size="0" 
             id="email"
+            {...register('email', { required: 'Укажите почту'})}
             />
         </FormBlock>
         <PassBlock>
@@ -144,19 +177,22 @@ const SignIn = () => {
         type="password" 
         size="0" 
         id="password"
+        {...register('password', { required: 'Укажите пароль'})}
         placeholder="не менее 8 символов" 
         /><img src='https://svgshare.com/i/iKc.svg' title='lock' />
     </PassBlock>
     <CheckBoxes>
 
-    <BtnSubmit>
+    <BtnSubmit type="submit">
             <span>Вход</span>
     </BtnSubmit>
+  
     <Check>
         <input type="checkbox" id='check' name='check'/>
         <label htmlFor='check'>Запомнить меня</label>
     </Check>
     </CheckBoxes>
+    </form>
     <Forgot />
     </Block>
     </>

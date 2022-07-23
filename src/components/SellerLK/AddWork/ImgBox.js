@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import img from '../../../assets/camera.png'
 
-const Section = styled.section`
+const Section = styled.button`
 width: 220px;
 height: 270px;
 display: flex;
@@ -13,6 +13,7 @@ border-radius: 20px;
 justify-content: center;
 align-items: center;
 margin-top: 2rem;
+font-family: 'Montserrat';
 background: rgba(57, 105, 176, 0.15);
 `
 const ImgCont = styled.div`
@@ -34,6 +35,9 @@ font-size: 11px;
 `
 
 const ImgBox = () => {
+
+  
+
   return (
     <Section>
         <ImgCont>

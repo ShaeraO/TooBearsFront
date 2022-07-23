@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import SwitchContent from './SwitchContent'
 import img from '../../assets/banner1.png'
 import Pagination from './Pagination'
+import { useDispatch, useSelector } from 'react-redux'
+import axios from '../../utils/axios'
+import { fetchCards } from '../../redux/slices/cards'
 
 const Section = styled.section`
 width: 75%;
@@ -104,24 +107,31 @@ const MarketCard = ({ img, name=" ", size=" ", seller=" ", price=" " }) => {
 }
 
 const Market = () => {
+
+  const dispatch = useDispatch()
+  const {cards} = useSelector((state) => state.cards)
+
+  const isCardsLoading = cards.status === 'loading'
+
+  React.useEffect(() =>{
+    dispatch(fetchCards())
+  }, [])
+
+
   return (
     <Section>
       <SwitchContent />
-      {/* <MarketPart>
-        <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
-        <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
-        <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
-        <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
-        <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
-        <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
-        <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
-        <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
-        <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
-        <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
-        <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
-        <MarketCard img={img} name="Fedya Bear" seller="Funny Teddy Toys" size="15cm" price="139.00 $"/>
+      <MarketPart>
+      {(isCardsLoading ? [...Array(12)] : cards.items).map((obj, index) =>
+        isCardsLoading ? (
+          <MarketCard key={index} isLoading={true}/>
+        ) : (
+          <MarketCard id={obj._id} img={img} name={obj.name} size={obj.size + 'cm'} seller={obj.username} price={obj.price + '.00 $'} key={index}/>
+        )
+      )}
+
       </MarketPart>
-      <Pagination /> */}
+      <Pagination />
     </Section>
   )
 }

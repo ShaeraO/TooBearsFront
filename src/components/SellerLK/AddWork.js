@@ -1,10 +1,10 @@
-import AddImg from './AddWork/AddImg';
+import Add from './AddWork/AddWork';
 import React from 'react'
 
 const AddWork = () => {
     return(
         <>
-        <AddImg />
+        <Add />
         </>
     );
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 
 const Block = styled.div`
@@ -38,8 +39,8 @@ const RegisterNav = () => {
   return (
     <Block>
         <Menu>
-            <MenuItem>Регистрация</MenuItem>
-            <MenuItem>Вход</MenuItem>
+            <Link to='register'><MenuItem>Регистрация</MenuItem></Link>
+            <Link to='login'><MenuItem>Вход</MenuItem></Link>
         </Menu>
     </Block>
   )

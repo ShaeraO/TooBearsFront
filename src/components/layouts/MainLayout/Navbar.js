@@ -1,11 +1,12 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Logo from './Logo'
 import Searchbar from './Searchbar'
 import Button from './Button'
 import ButtonFlag from './ButtonFlag'
 import { Link } from 'react-router-dom'
-import { AuthContext } from '../../../context/AuthContext'
+import { useSelector } from 'react-redux'
+import { selectIsAuth } from '../../../redux/slices/auth'
 
 const Section = styled.nav`
 width: 100%;
@@ -60,7 +61,7 @@ transition: all 0.4s ease;
 
 const Navbar = () => {
 
-    const { data } = useContext(AuthContext);
+ const isAuth = useSelector(selectIsAuth)
 
   return (
     <Section>
@@ -70,7 +71,7 @@ const Navbar = () => {
                 <Searchbar placeholder="Поиск..."/>
             </SearchbarCont>
             <ButtonContainer>
-                {data ? <Link to="account"><span>{data.username}</span></Link> : ( <Link to="auth"><Button text="ВХОД" /></Link> )}
+                {isAuth ? (<Link to="/account"><span style={{fontSize: 11}} >Имя пользователя</span></Link>) : (<Link to="auth"><Button text="ВХОД" /></Link>)}
                 <ButtonFlag text="RU" />
             </ButtonContainer>
         </TopNav>
